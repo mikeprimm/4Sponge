@@ -34,6 +34,7 @@ import org.spongepowered.api.event.message.MessageChannelEvent;
 import org.spongepowered.api.text.LiteralText;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.TranslatableText;
+import org.spongepowered.api.text.channel.MessageChannel;
 import org.spongepowered.api.text.serializer.TextSerializers;
 
 import javax.annotation.Nonnull;
@@ -44,6 +45,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * The standard {@link Endpoint} for minecraft chat messages.
@@ -69,9 +71,14 @@ public class ChatEndpoint extends MinecraftEndpoint {
         if (!event.getChannel().isPresent() || !event.getCause().first(Player.class).isPresent()) {
             return; // Not a player chatting
         }
+        MessageChannel mc = event.getChannel().get();
+        // If Nucleus staff chat, ignore it
+        if (mc.getClass().getName().endsWith("StaffChatMessageChannel")) {
+        	return;
+        }
         Map<String, Object> data = new HashMap<>();
         Text text = event.getOriginalMessage();
-        Set<MinecraftPlayer> recipients = this.collectionToMinecraftPlayer(event.getChannel().get().getMembers());
+        Set<MinecraftPlayer> recipients = this.collectionToMinecraftPlayer(mc.getMembers());
         data.put(ChatEndpoint.RECIPIENT_NAMES, recipients);
         if (text instanceof TranslatableText) {
             TranslatableText trans = (TranslatableText) text;
