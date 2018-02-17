@@ -2,11 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.kitteh</groupId>
-    <artifactId>craftirc-sponge</artifactId>
+    <groupId>org.kitth.craftirc</groupId>
 
     <name>CraftIRC Sponge</name>
-    <version>4.1.6-SNAPSHOT</version>
 
     <url>http://kitteh.org/</url>
     <properties>
@@ -46,8 +44,7 @@
   	<dependency>
   		<groupId>org.spongepowered</groupId>
   		<artifactId>spongeapi</artifactId>
-  		<version>6.0.0</version>
-            <scope>compile</scope>
+  		<version>7.0.0</version>
   	</dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
@@ -65,7 +62,6 @@
     </dependencies>
 
     <build>
-        <finalName>CraftIRC</finalName>
         <defaultGoal>clean install</defaultGoal>
         <resources>
             <resource>
@@ -133,4 +129,6 @@
             </plugin>
         </plugins>
     </build>
+    <artifactId>CraftIRC</artifactId>
+    <version>4.1.6-S7.0</version>
 </project>
